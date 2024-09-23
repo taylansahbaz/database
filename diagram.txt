@@ -1,0 +1,67 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table restaurants {
+  id integer [primary key]
+  name varchar
+  restaurant_type_id integer //foreign key
+  min_cost integer
+  rating float
+  is_free_delivery bool
+  delivery_time varchar
+  cost_level integer
+  status integer // açık kapalı
+  created_at timestamp 
+}
+
+Table restaurant_type {
+  id integer [primary key]
+  type varchar
+
+  created_at timestamp
+}
+
+
+Table menus {
+  id integer [primary key]
+  title varchar
+  price float
+  description text [note: 'descritpion']
+  restaurant_id integer //foreign key
+  food_type_id integer //foreign key food type
+  created_at timestamp
+}
+
+
+Table users {
+  id integer [primary key]
+  email varchar
+  password varchar
+  user_name varchar
+  name varchar
+  surname varchar
+  created_at timestamp
+}
+Table orders {
+  id integer [primary key]
+  user_id integer
+  restaurant_id integer //foreign key
+  menu_id integer //foreign key
+  amount integer
+  created_at timestamp
+}
+
+
+
+
+Ref: "restaurant_type"."id" < "restaurants"."restaurant_type_id"
+
+Ref: "restaurant_type"."id" < "menus"."food_type_id"
+
+Ref: "restaurants"."id" < "menus"."restaurant_id"
+
+Ref: "menus"."id" < "orders"."menu_id"
+
+Ref: "restaurants"."id" < "orders"."restaurant_id"
+
+Ref: "users"."id" < "orders"."user_id"

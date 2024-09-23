@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}
+Edit Restaurant
+{% endblock %}
+{% block content %}
+    <h1>Edit User Record</h1>
+    {% for user in users %}
+    <form action="{{ url_for('edit_user_rec') }}" method="POST">
+
+        <label for="id"></label>
+        <input type="hidden" name="id" value="{{ user.id }}"><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{ user.email }}"><br>
+
+        <label for="user_name">User Name:</label>
+        <input type="text" name="user_name" value="{{ user.user_name }}"><br>
+        
+        <label for="name">Name:</label>
+        <input type="name" name="name" value="{{ user.name }}"><br>
+
+        <label for="surname">Surname:</label>
+        <input type="surname" name="surname" value="{{ user.surname }}"><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" value="{{ user.password }}"><br>
+
+        <input type="submit" value="Submit" /><br>
+    </form>
+    {% endfor %}
+{% endblock %}

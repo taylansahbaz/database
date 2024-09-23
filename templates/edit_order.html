@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %}
+Edit Restaurant
+{% endblock %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <h1>Edit Order Record</h1>
+    <form action="{{ url_for('edit_order_rec') }}" method="POST">
+        <h3 style="color:blue  ">Order ID: {{ order.id }}</h3>
+        <input type="hidden" name="id" value="{{ order.id }}">
+        
+        <br>
+    
+        
+        <label for="restaurant_id" class=" col-form-label">Restaurant Name</label>
+    
+    
+        <div class="">
+            <select  id="restaurant_id" name="restaurant_id">   
+                <option value="">Select Restaurant</option>
+                {% for restaurant in restaurants %}
+                    <option value="{{ restaurant['id'] }}">{{ restaurant['name'] }}</option> 
+                {% endfor %}
+            </select>
+        </div>
+    
+    
+    
+        <label for="menu_id" class=" col-form-label">Menu Title</label>
+    
+    
+        <div class="">
+            <select id="menu_id" name="menu_id">
+                <!-- Options will be dynamically added using JavaScript -->
+            </select>
+        </div>
+        
+        
+        Order Amount<br>
+        <input type="text" name="amount" value="{{ order.amount }}"><br>
+        
+        <input type="hidden" name="user_id" value="{{ order.user_id }}"><br>
+
+        <br>
+
+        <input type="submit" value="Submit" /><br>
+    </form>
+    <script>
+        $(document).ready(function() {
+            // Event handler for restaurant dropdown change
+            $('#restaurant_id').change(function() {
+                var selectedRestaurantId = $(this).val();
+                console.log('Selected restaurant ID:', selectedRestaurantId);
+                // Make an AJAX request to fetch menu options for the selected restaurant
+                $.ajax({
+                    type: 'GET',
+                    url: '/get_menus',  // Replace with the actual endpoint to fetch menus
+                    data: { restaurant_id: selectedRestaurantId },
+                    success: function(data) {
+                        // Update the menu dropdown with the fetched options
+                        $('#menu_id').html(data);
+                    },
+                    error: function(error) {
+                        console.log('Error fetching menu options:', error);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

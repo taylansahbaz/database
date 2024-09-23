@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block title %}
+Add New Restaurant
+{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <form action="{{ url_for('enternew') }}" method="POST" style="width: 25%" class="shadow-lg mt-3">
+        
+        <div class="row px-4 mt-3 text-center">
+            <h3>Please Add the New Restaurant Information:</h3>
+        </div>  
+
+        <div class="row px-4 mt-3">
+            <label for="name" class=" col-form-label">Name</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <input class="w-100" type="text" name="name" id="name" />
+            </div>
+        </div>
+        
+        <div class="row px-4 mt-3">
+            <label for="restaurant_type_id" class=" col-form-label">Restaurant Type</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <select class="w-100" name="restaurant_type_id" id="restaurant_type_id">
+                    {% for restaurant_type in restaurant_types %}
+                    <option value="{{ restaurant_type['id'] }}">{{ restaurant_type['type'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        
+        <div class="row px-4 mt-3">
+            <label for="min_cost" class=" col-form-label">Minimum Cost</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <input class="w-100" type="text" name="min_cost" id="min_cost"/>
+            </div>
+        </div>
+        
+        <div class="row px-4 mt-3">
+            <label for="rating" class=" col-form-label">Rating</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <input class="w-100" type="text" name="rating" id="rating" />
+            </div>
+        </div>
+        
+        <div class="row px-4 mt-3">
+            <label for="is_free_delivery" class=" col-form-label w-auto">Is Free Delivery?</label>
+            <div class="d-flex align-items-center w-auto">
+                <input class="w-100" type="checkbox" name="is_free_delivery" id="is_free_delivery" />
+            </div>
+        </div>
+        
+
+        <div class="row px-4 mt-3">
+            <label for="delivery_time" class=" col-form-label">Delivery Time</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <input class="w-100" type="text" name="delivery_time" id="delivery_time" />
+            </div>
+        </div>
+        
+        <div class="row px-4 mt-3">
+            <label for="cost_level" class=" col-form-label">Cost Level</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <input class="w-100" type="text" name="cost_level" id="cost_level" />
+            </div>
+        </div>
+        
+        <div class="row px-4 mt-3">
+            <label for="status" class=" col-form-label">Status</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <input class="w-100" type="text" name="status" id="status"/>
+            </div>
+        </div>
+        
+        
+        <div class="row px-4 my-3">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </div>
+        
+    </form>
+    
+</div>
+    {% endblock %}

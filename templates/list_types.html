@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}
+List All Restaurant Types
+{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between">
+    <h2>Restaurant Types</h2>
+</div>
+
+<table class="table table-striped">
+    <thead class="text-center">
+        <tr class="text-black">
+            <th scope="col">Type ID</th>
+            <th scope="col">Type</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+
+    <tbody class="text-center">
+        {% for type in restaurant_types %}
+        <tr>
+            <td>{{ type['id'] }}</td>
+            <td>{{ type['type'] }}</td>
+            <td>
+                <form action="{{ url_for('edit_type') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ type['id'] }}">
+                    <button class="btn btn-warning" type="submit"> Edit </button>
+                </form>
+            </td>
+            <td>
+                <form onsubmit="return confirm('Are you sure you want to DELETE this Restaurant Type?');" action="{{ url_for('deletetype') }}" method="POST">
+                    <input type="hidden" name="id" value="{{ type['id'] }}">
+                    <button class="btn btn-danger" type="submit"> Delete </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+
+</table>
+
+{% endblock %}

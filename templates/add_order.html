@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block title %}
+Add New Restaurant
+{% endblock %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+{% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+{% endif %}
+<div class="d-flex justify-content-center">
+    <form action="{{ url_for('add_order') }}" method="POST" class="w-25 shadow-lg mt-3">
+        
+        <div class="row px-4 mt-3 text-center">
+            <h3>Please Add a New Order:</h3>
+        </div>   
+        
+        <div class="row px-4 mt-3">
+            <label for="user_id" class=" col-form-label">User ID</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+              <input class="w-100" type="text" name="user_id" id="user_id" required>
+            </div>
+        </div>
+
+        <div class="row px-4 mt-3">
+            <label for="restaurant_id" class=" col-form-label">Restaurant Name</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <select class="w-100" id="restaurant_id" name="restaurant_id">   
+                    <option value="">Select Restaurant</option>
+                    {% for restaurant in restaurants %}
+                        <option value="{{ restaurant['id'] }}">{{ restaurant['name'] }}</option> 
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row px-4 mt-3">
+            <label for="menu_id" class=" col-form-label">Menu Title</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+                <select class="w-100" id="menu_id" name="menu_id">
+                    <!-- Options will be dynamically added using JavaScript -->
+                </select>
+            </div>
+        </div>
+        
+  
+        <div class="row px-4 mt-3">
+            <label for="amount" class=" col-form-label">Amount</label>
+        </div>
+        <div class="row px-4">
+            <div class="">
+              <input class="w-100" type="text" name="amount" id="amount" required>
+            </div>
+        </div>
+  
+
+        <div class="row px-4 my-3">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </div>
+        
+    </form>
+    
+  </div>
+
+
+
+<script>
+    $(document).ready(function() {
+        // Event handler for restaurant dropdown change
+        $('#restaurant_id').change(function() {
+            var selectedRestaurantId = $(this).val();
+            // Make an AJAX request to fetch menu options for the selected restaurant
+            $.ajax({
+                type: 'GET',
+                url: '/get_menus',  // Replace with the actual endpoint to fetch menus
+                data: { restaurant_id: selectedRestaurantId },
+                success: function(data) {
+                    // Update the menu dropdown with the fetched options
+                    $('#menu_id').html(data);
+                },
+                error: function(error) {
+                    console.log('Error fetching menu options:', error);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

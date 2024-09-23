@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block title %}
+Add New Restaurant
+{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center">
+  <form action="{{ url_for('add_user') }}" method="POST" class="w-25 shadow-lg mt-3">
+      
+      <div class="row px-4 mt-3 text-center">
+          <h3>Please Add the New User Information:</h3>
+      </div>  
+
+      <div class="row px-4 mt-3">
+          <label for="email" class=" col-form-label">Email</label>
+      </div>
+      <div class="row px-4">
+          <div class="">
+            <input class="w-100" type="email" name="email" id="email" required>
+          </div>
+      </div>
+
+      <div class="row px-4 mt-3">
+          <label for="user_name" class=" col-form-label">Username</label>
+      </div>
+      <div class="row px-4">
+          <div class="">
+            <input class="w-100" type="text" name="user_name" id="user_name" required>
+          </div>
+      </div>
+
+      <div class="row px-4 mt-3">
+          <label for="name" class=" col-form-label">Name</label>
+      </div>
+      <div class="row px-4">
+          <div class="">
+            <input class="w-100" type="text" name="name" id="name" required>
+          </div>
+      </div>
+
+      <div class="row px-4 mt-3">
+          <label for="surname" class=" col-form-label">Surname</label>
+      </div>
+      <div class="row px-4">
+          <div class="">
+            <input class="w-100" type="text" name="surname" id="surname" required>
+          </div>
+      </div>
+
+      <div class="row px-4 mt-3">
+          <label for="password" class=" col-form-label">Password</label>
+      </div>
+      <div class="row px-4">
+          <div class="">
+            <input class="w-100" type="password" name="password" id="password" required>
+          </div>
+      </div>
+      
+      <div class="row px-4 my-3">
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </div>
+      
+  </form>
+  
+</div>
+
+{% endblock %}
